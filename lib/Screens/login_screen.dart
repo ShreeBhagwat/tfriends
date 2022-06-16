@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tfriends/Screens/change_password.dart';
 
+import '../Helpers/helper_functions.dart';
 import '../Widget/custom_text_field_widget.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -35,13 +37,16 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       Image.asset(
                         'images/tfriends_logo.png',
-                        height: 110,
-                        width: 120,
+                        height: 107.63,
+                        width: 200,
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(20.0),
+                        padding: const EdgeInsets.only(
+                          right: 10.0,
+                          left: 20.0,
+                        ),
                         child: Container(
-                          height: 30,
+                          height: 60,
                           width: 1,
                           color: Colors.black,
                         ),
@@ -51,8 +56,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Text(
                           'Sign In',
                           style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 17,
+                            color: Colors.black,
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
@@ -92,12 +98,20 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text(
-                        'Forgot Password?',
-                        style: TextStyle(
-                            color: Colors.blue,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15),
+                      InkWell(
+                        onTap: () {
+                          HelperClass.nanvigateToScreen(
+                            context,
+                            ChangePassword(),
+                          );
+                        },
+                        child: Text(
+                          'Forgot Password?',
+                          style: TextStyle(
+                              color: Colors.blue,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15),
+                        ),
                       ),
                     ],
                   ),
