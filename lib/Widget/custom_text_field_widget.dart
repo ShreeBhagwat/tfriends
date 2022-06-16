@@ -4,7 +4,7 @@ class CustomTextFieldWidget extends StatefulWidget {
   CustomTextFieldWidget({
     Key? key,
     required this.labeltext,
-    required this.icon,
+    this.icon,
     required this.textEditingController,
     this.isObscure,
     this.icons,
@@ -13,7 +13,7 @@ class CustomTextFieldWidget extends StatefulWidget {
 
   final TextEditingController textEditingController;
   final String labeltext;
-  final IconData icon;
+  final IconData? icon;
   final IconData? icons;
   bool? isObscure;
   final IconButton? iconButton;
