@@ -11,6 +11,7 @@ class TFriends extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'New New Changes Came',
       home: LoginScreen(),
     );
   }
