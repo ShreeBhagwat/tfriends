@@ -11,7 +11,11 @@ class TFriends extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+<<<<<<< Aniket
       title: 'New New Changes Came',
+=======
+      title: 'Aniket Kharat',
+>>>>>>> master
       home: LoginScreen(),
     );
   }
