@@ -11,7 +11,11 @@ class TFriends extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+<<<<<<< HEAD
       title: 'New Chnages In Masters',
+=======
+      title: 'No Changes',
+>>>>>>> db7bceb3d0449b54b0e148dfa41347d63ea55fb6
       home: LoginScreen(),
     );
   }
