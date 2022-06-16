@@ -12,7 +12,8 @@ class TFriends extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: ChangePassword(),
+      title: 'No Changes',
+      home: LoginScreen(),
     );
   }
 }
