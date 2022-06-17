@@ -1,4 +1,10 @@
+import 'dart:convert';
+
+import 'package:tfriends/Models/login_model.dart';
+
 import 'package:tfriends/Network/network_service.dart';
+
+import '../Models/login_model.dart';
 
 class ApiService extends NetworkService {
   String baseApiUrl = 'https://tugu.drivesung.com/APIV4DEVTEST/';
@@ -10,8 +16,8 @@ class ApiService extends NetworkService {
     'Accept': 'application/json',
   };
 
-  void loginUser(String email, String password) async {
-    Map<String, String> _body = <String, String>{
+  Future<UserInfo> loginUser(String email, String password) async {
+    Map<String, String> body = <String, String>{
       "grant_type": "password",
       "username": email,
       "password": password,
@@ -20,11 +26,42 @@ class ApiService extends NetworkService {
 
     var response = await postResponse(
         'https://tugu.drivesung.com/APIV4DEVTEST/token',
-        body: _body);
+        body: body);
 
-    print(response);
+    var decodeJson = jsonDecode(response);
+
+    return UserInfo.fromJson(decodeJson);
   }
 }
+
+// import 'package:tfriends/Models/login_model.dart';
+// import 'package:tfriends/Network/network_service.dart';
+
+// class ApiService extends NetworkService {
+//   String baseApiUrl = 'https://tugu.drivesung.com/APIV4DEVTEST/';
+
+//   String token = 'token';
+
+//   Map<String, String> header = {
+//     'Content-Type': 'application/x-www-form-urlencoded',
+//     'Accept': 'application/json',
+//   };
+
+//   Future<UserInfo> loginUser(String email, String password) async {
+//     Map<String, String> body = <String, String>{
+//       "grant_type": "password",
+//       "username": email,
+//       "password": password,
+//       "scope": "regi#62#drivesung#B"
+//     };
+
+//     var response = await postResponse(
+//         'https://tugu.drivesung.com/APIV4DEVTEST/token',
+//         body: body);
+
+//     print(response);
+//   }
+// }
 
 // import 'dart:convert';
 

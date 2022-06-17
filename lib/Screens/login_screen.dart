@@ -4,6 +4,7 @@ import 'package:tfriends/Network/api_service.dart';
 import 'package:tfriends/Providers/app_state_manager.dart';
 import 'package:tfriends/Screens/change_password.dart';
 
+import '../Providers/user_info_manager.dart';
 import '../Widget/custom_text_field_widget.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -116,8 +117,11 @@ class LoginScreen extends StatelessWidget {
                     onTap: () {
                       emailid = emailidTextController.text;
                       password = passwordTextController.text;
-                      var aniresponse =
-                          ApiService().loginUser(emailid, password);
+                      Provider.of<UserInfoManager>(context, listen: false)
+                          .setUserInfo(emailidTextController.text,
+                              passwordTextController.text);
+                      // var aniresponse =
+                      //     ApiService().loginUser(emailid, password);
                       //navigation of userscreen page
                       // LoginUser(context);
                     },
