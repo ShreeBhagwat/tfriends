@@ -7,36 +7,34 @@ class NetworkService extends BaseApiService {
   @override
   Future getResponse(String url) async {
     dynamic responseJson;
-    Uri uri = Uri.parse(url);
     try {
+      Uri uri = Uri.parse(url);
       final response = await http.get(uri);
       responseJson = returnResponse(response);
     } on SocketException {
-      throw Exception('No internet Connection');
+      throw Exception('No Internet Connection');
     } catch (e) {
       throw Exception(e.toString());
     }
-
     return responseJson;
   }
 
   @override
   Future postResponse(String url, {Map<String, String>? headers, body}) async {
     dynamic responseJson;
-    Uri uri = Uri.parse(url);
     try {
+      Uri uri = Uri.parse(url);
       final response = await http.post(uri, headers: headers, body: body);
       responseJson = returnResponse(response);
     } on SocketException {
-      throw Exception('No internet Connection');
+      throw Exception('No Internet Connection');
     } catch (e) {
       throw Exception(e.toString());
     }
-
     return responseJson;
   }
 
-  returnResponse(http.Response response) {
+  dynamic returnResponse(http.Response response) {
     if (response.statusCode == 200) {
       return response.body;
     } else {
