@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+<<<<<<< HEAD
 import 'package:tfriends/Models/login_model.dart';
 
 import 'package:tfriends/Network/network_service.dart';
@@ -11,6 +12,15 @@ class ApiService extends NetworkService {
 
   String token = 'token';
 
+=======
+import 'package:http/http.dart';
+import 'package:tfriends/Models/user_info_model.dart';
+import 'package:tfriends/Network/network_service.dart';
+
+class ApiService extends NetworkService {
+  String baseApiUrl = 'https://tugu.drivesung.com/APIV4DEVTEST/';
+  String token = 'token';
+>>>>>>> master
   Map<String, String> header = {
     'Content-Type': 'application/x-www-form-urlencoded',
     'Accept': 'application/json',
@@ -27,6 +37,7 @@ class ApiService extends NetworkService {
     var response = await postResponse(
         'https://tugu.drivesung.com/APIV4DEVTEST/token',
         body: body);
+<<<<<<< HEAD
 
     var decodeJson = jsonDecode(response);
 
@@ -94,3 +105,9 @@ class ApiService extends NetworkService {
 //     print(response.toString());
 //   }
 // }
+=======
+    var decodedJson = jsonDecode(response);
+    return UserInfo.fromJson(decodedJson);
+  }
+}
+>>>>>>> master
