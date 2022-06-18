@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tfriends/Providers/app_state_manager.dart';
+import 'package:tfriends/Providers/user_info_manager.dart';
 import 'package:tfriends/Screens/login_screen.dart';
 
 void main() {
@@ -15,6 +16,7 @@ class TFriends extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AppStateManager()),
+        ChangeNotifierProvider(create: (_) => UserInfoManager()),
       ],
       child: MaterialApp(
         title: 'No Changes',
