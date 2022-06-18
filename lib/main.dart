@@ -10,6 +10,8 @@ import 'package:tfriends/Screens/login_screen.dart';
 
 import 'package:tfriends/screens/change_password.dart';
 
+import 'Screens/splash_screen.dart';
+
 void main() {
   runApp(TFriends());
 }
@@ -26,7 +28,7 @@ class TFriends extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'No Changes',
-        home: LoginScreen(),
+        home: SlashScreen(),
       ),
     );
   }
