@@ -5,6 +5,8 @@ class AppStateManager extends ChangeNotifier {
   bool isObscureChangeOldPassword = true;
   bool isObscureChangeNewPassword = true;
 
+  int bottomNavBarSelectedIndex = 0;
+
   void setSignUpScreenPasswordObsecure() {
     isObscureSignUpPassword = !isObscureSignUpPassword;
     notifyListeners();
@@ -17,6 +19,11 @@ class AppStateManager extends ChangeNotifier {
 
   void setIsObscureChangeNewPassword() {
     isObscureChangeNewPassword = !isObscureChangeNewPassword;
+    notifyListeners();
+  }
+
+  void setBottomNavigationBarIndex(int index) {
+    bottomNavBarSelectedIndex = index;
     notifyListeners();
   }
 }
