@@ -33,9 +33,9 @@ class UserInfoManager extends ChangeNotifier {
     SharedPreferences pref = await SharedPreferences.getInstance();
 
     userInfoAuthToken = pref.getString("userInfoAuthToken") ?? '';
-    String? sharedPrefuserInfo = pref.getString('userInfo');
+    String? sharedPrefuserInfo = pref.getString('userInfo') ?? '{}';
 
-    var userData = jsonDecode(sharedPrefuserInfo!);
+    var userData = jsonDecode(sharedPrefuserInfo);
     user = UserInfo.fromJson(userData);
 
     notifyListeners();

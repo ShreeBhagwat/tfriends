@@ -8,6 +8,7 @@ import 'package:tfriends/Helpers/helper_functions.dart';
 import 'package:tfriends/Providers/user_info_manager.dart';
 import 'package:tfriends/Screens/change_password.dart';
 import 'package:tfriends/Screens/login_screen.dart';
+import 'package:tfriends/Screens/root_screen.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -16,9 +17,13 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Provider.of<UserInfoManager>(context, listen: false).getLocalUserInfo();
     Timer(const Duration(seconds: 5), () {
-      Provider.of<UserInfoManager>(context, listen: false).userInfoAuthToken == ''
+      Provider.of<UserInfoManager>(context, listen: false).userInfoAuthToken ==
+              ''
           ? HelperClass.nanvigateToScreen(context, LoginScreen())
-          : HelperClass.nanvigateToScreen(context, ChangePassword());
+          : Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (_) => RootScreen()),
+              (route) => false);
     });
     return Scaffold(
       body: Center(
