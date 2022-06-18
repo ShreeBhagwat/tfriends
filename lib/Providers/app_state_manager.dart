@@ -1,25 +1,3 @@
-<<<<<<< HEAD
-import 'package:flutter/cupertino.dart';
-
-class AppStateManager extends ChangeNotifier {
-  bool isObsecureSignUpPassword = true;
-  bool isObsecureNewPassword = true;
-  bool isObsecureOldPassword = true;
-
-  void setSignUpScreenPasswordObsecure() {
-    isObsecureSignUpPassword = !isObsecureSignUpPassword;
-
-    notifyListeners();
-  }
-
-  void setnewPasswordObsecure() {
-    isObsecureNewPassword = !isObsecureNewPassword;
-    notifyListeners();
-  }
-
-  void setoldPasswordObsecure() {
-    isObsecureOldPassword = !isObsecureOldPassword;
-=======
 import 'package:flutter/material.dart';
 
 class AppStateManager extends ChangeNotifier {
@@ -39,7 +17,6 @@ class AppStateManager extends ChangeNotifier {
 
   void setIsObscureChangeNewPassword() {
     isObscureChangeNewPassword = !isObscureChangeNewPassword;
->>>>>>> master
     notifyListeners();
   }
 }

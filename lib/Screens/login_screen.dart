@@ -2,26 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tfriends/Network/api_service.dart';
 import 'package:tfriends/Providers/app_state_manager.dart';
-<<<<<<< HEAD
-=======
 import 'package:tfriends/Providers/user_info_manager.dart';
->>>>>>> master
 import 'package:tfriends/Screens/change_password.dart';
 
+import '../Helpers/helper_functions.dart';
 import '../Providers/user_info_manager.dart';
 import '../Widget/custom_text_field_widget.dart';
 
 class LoginScreen extends StatelessWidget {
-<<<<<<< HEAD
-  LoginScreen({Key? key}) : super(key: key);
-
-  @override
-  // State<LoginScreen> createState() => _LoginScreenState();
-// }
-
-// class _LoginScreenState extends State<LoginScreen> {
-=======
->>>>>>> master
   String emailid = ' ';
 
   String password = ' ';
@@ -105,38 +93,6 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-<<<<<<< HEAD
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                  child: CustomTextFieldWidget(
-                    labeltext: 'Email or Mobile No.',
-                    icon: Icons.person,
-                    textEditingController: emailidTextController,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                  child: Consumer<AppStateManager>(
-                    builder: (context, appStateManager, child) =>
-                        CustomTextFieldWidget(
-                      labeltext: 'Password',
-                      icon: Icons.lock,
-                      icons: Icons.visibility,
-                      textEditingController: passwordTextController,
-                      isObscure: appStateManager.isObsecureSignUpPassword,
-                      iconButton: IconButton(
-                        onPressed: () {
-                          appStateManager.setSignUpScreenPasswordObsecure();
-                        },
-                        icon: Icon(appStateManager.isObsecureSignUpPassword
-                            ? Icons.visibility
-                            : Icons.visibility_off),
-                      ),
-=======
->>>>>>> master
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
@@ -193,50 +149,9 @@ class LoginScreen extends StatelessWidget {
                           )),
                           decoration: BoxDecoration(
                             color: Colors.blue,
-<<<<<<< HEAD
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                  child: InkWell(
-                    //inkwell gives material properties
-                    onTap: () {
-                      emailid = emailidTextController.text;
-                      password = passwordTextController.text;
-                      Provider.of<UserInfoManager>(context, listen: false)
-                          .setUserInfo(emailidTextController.text,
-                              passwordTextController.text);
-                      // var aniresponse =
-                      //     ApiService().loginUser(emailid, password);
-                      //navigation of userscreen page
-                      // LoginUser(context);
-                    },
-                    child: Container(
-                      width: double.infinity,
-                      height: 38,
-                      child: Center(
-                          child: Text(
-                        'Sign Up',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold),
-                      )),
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(10),
-=======
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
->>>>>>> master
                       ),
                     ),
                   ],

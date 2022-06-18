@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+
 import 'package:provider/provider.dart';
+
 import 'package:tfriends/Providers/app_state_manager.dart';
+
 import 'package:tfriends/Providers/user_info_manager.dart';
+
 import 'package:tfriends/Screens/login_screen.dart';
+
+import 'package:tfriends/screens/change_password.dart';
 
 void main() {
   runApp(TFriends());
@@ -13,35 +19,15 @@ class TFriends extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => AppStateManager()),
-        ChangeNotifierProvider(create: (_) => UserInfoManager())
-=======
-<<<<<<< HEAD
-    return MaterialApp(
-<<<<<<< HEAD
-      title: 'New Chnages In Masters',
-=======
-      title: 'No Changes',
->>>>>>> db7bceb3d0449b54b0e148dfa41347d63ea55fb6
-      home: LoginScreen(),
-=======
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AppStateManager()),
         ChangeNotifierProvider(create: (_) => UserInfoManager()),
->>>>>>> master
       ],
       child: MaterialApp(
         title: 'No Changes',
         home: LoginScreen(),
       ),
-<<<<<<< HEAD
-=======
->>>>>>> 6a90a0847efc0aa67b82bc33bf99cb5944fb50bb
->>>>>>> master
     );
   }
 }
