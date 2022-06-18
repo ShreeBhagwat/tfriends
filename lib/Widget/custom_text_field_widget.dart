@@ -1,44 +1,46 @@
 import 'package:flutter/material.dart';
 
-class CustomTextFieldWidget extends StatefulWidget {
+class CustomTextFieldWidget extends StatelessWidget {
   CustomTextFieldWidget({
     Key? key,
     required this.labeltext,
     required this.icon,
     required this.textEditingController,
-    this.isObscure,
+    this.isObscure = false,
     this.icons,
     this.iconButton,
+    this.errorText,
   }) : super(key: key);
 
   final TextEditingController textEditingController;
   final String labeltext;
   final IconData icon;
   final IconData? icons;
-  bool? isObscure;
+  bool isObscure;
   final IconButton? iconButton;
+  final String? errorText;
 
-  @override
-  State<CustomTextFieldWidget> createState() => _CustomTextFieldWidgetState();
-}
-
-class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      controller: widget.textEditingController,
-      obscureText: widget.isObscure ?? false,
-      decoration: InputDecoration(
-        // suffixIcon: Icon(icon, color: Colors.grey,),
-        //prefixIcon: Icon(icon, color: Colors.blue,),
+    return TextFormField(
+      validator: ((value) {
+        String pattern =
+            r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+        RegExp regex = RegExp(pattern);
 
+        return (!regex.hasMatch(value!)) ? 'Is not a valid email' : null;
+      }),
+      controller: textEditingController,
+      obscureText: isObscure,
+      decoration: InputDecoration(
+        errorText: errorText,
         prefixIcon: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             SizedBox(
               width: 5,
             ),
-            Icon(widget.icon, color: Colors.blue),
+            Icon(icon, color: Colors.blue),
             SizedBox(
               width: 5,
             ),
@@ -49,13 +51,12 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
             ),
           ],
         ),
-
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
         labelStyle: TextStyle(color: Colors.grey),
         label: Text(
-          widget.labeltext,
+          labeltext,
           style: TextStyle(
               color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 12),
         ),
@@ -69,8 +70,7 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
         contentPadding: const EdgeInsets.symmetric(
           vertical: 5.0,
         ),
-
-        suffixIcon: widget.iconButton ??
+        suffixIcon: iconButton ??
             Container(
               width: 0,
             ),
