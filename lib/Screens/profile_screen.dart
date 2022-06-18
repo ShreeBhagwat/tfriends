@@ -60,7 +60,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: CustomTextFieldWidget(
                       labeltext: 'Full Name',
                       icon: Icons.person,
-                      color: Color.fromARGB(255, 132, 130, 130),
+                      
                       textEditingController: emailidTextController),
                 ),
                 Padding(
@@ -68,7 +68,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: CustomTextFieldWidget(
                       labeltext: 'Email Id',
                       icon: Icons.mail,
-                      color: Color.fromARGB(255, 132, 130, 130),
+                      
                       textEditingController: emailidTextController),
                 ),
                 Padding(
@@ -76,7 +76,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: CustomTextFieldWidget(
                       labeltext: 'Mobile Number',
                       icon: Icons.phone_outlined,
-                      color: Color.fromARGB(255, 132, 130, 130),
+                      //color: Color.fromARGB(255, 132, 130, 130),
                       textEditingController: emailidTextController),
                 ),
                 Padding(
