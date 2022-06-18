@@ -11,12 +11,15 @@ import '../Widget/custom_loader.dart';
 import '../Widget/custom_text_field_widget.dart';
 
 class LoginScreen extends StatelessWidget {
+  bool isError = false;
   String emailid = ' ';
 
   String password = ' ';
   TextEditingController emailidTextController = TextEditingController();
 
   TextEditingController passwordTextController = TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
 
 //controller is used to get values from user
   @override
@@ -28,134 +31,148 @@ class LoginScreen extends StatelessWidget {
           builder: (context, userInfoManage, child) => Center(
             child: Stack(
               children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 100, 0, 0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            'images/tfriends_logo.png',
-                            height: 107.63,
-                            width: 200,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              right: 10.0,
-                              left: 20.0,
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 100, 0, 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              'images/tfriends_logo.png',
+                              height: 107.63,
+                              width: 200,
                             ),
-                            child: Container(
-                              height: 60,
-                              width: 1,
-                              color: Colors.black,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                            child: Text(
-                              'Sign In',
-                              style: TextStyle(
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                right: 10.0,
+                                left: 20.0,
+                              ),
+                              child: Container(
+                                height: 60,
+                                width: 1,
                                 color: Colors.black,
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                      child: CustomTextFieldWidget(
-                        labeltext: 'Email or Mobile No.',
-                        icon: Icons.person,
-                        textEditingController: emailidTextController,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                      child: Consumer<AppStateManager>(
-                        builder: (context, appStateManager, child) =>
-                            CustomTextFieldWidget(
-                          labeltext: 'Password',
-                          icon: Icons.lock,
-                          icons: Icons.visibility,
-                          textEditingController: passwordTextController,
-                          isObscure: appStateManager.isObscureSignUpPassword,
-                          iconButton: IconButton(
-                            onPressed: () {
-                              appStateManager.setSignUpScreenPasswordObsecure();
-                            },
-                            icon: Icon(appStateManager.isObscureSignUpPassword
-                                ? Icons.visibility
-                                : Icons.visibility_off),
-                          ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                              child: Text(
+                                'Sign In',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              HelperClass.nanvigateToScreen(
-                                context,
-                                ChangePassword(),
-                              );
-                            },
-                            child: Text(
-                              'Forgot Password?',
-                              style: TextStyle(
-                                  color: Colors.blue,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                        child: CustomTextFieldWidget(
+                          validtorFunction: ((value) {
+                            String pattern =
+                                r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                            RegExp regex = RegExp(pattern);
+
+                            return (!regex.hasMatch(value!))
+                                ? 'Is not a valid email'
+                                : null;
+                          }),
+                          labeltext: 'Email or Mobile No.',
+                          icon: Icons.person,
+                          textEditingController: emailidTextController,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                        child: Consumer<AppStateManager>(
+                          builder: (context, appStateManager, child) =>
+                              CustomTextFieldWidget(
+                            labeltext: 'Password',
+                            icon: Icons.lock,
+                            icons: Icons.visibility,
+                            textEditingController: passwordTextController,
+                            isObscure: appStateManager.isObscureSignUpPassword,
+                            iconButton: IconButton(
+                              onPressed: () {
+                                appStateManager
+                                    .setSignUpScreenPasswordObsecure();
+                              },
+                              icon: Icon(appStateManager.isObscureSignUpPassword
+                                  ? Icons.visibility
+                                  : Icons.visibility_off),
                             ),
                           ),
-                        ],
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                      child: InkWell(
-                        //inkwell gives material properties
-                        onTap: () async {
-                          //navigation of userscreen page
-                          print('Login Button Tapped');
-                          await userInfoManage.setUserInfo(
-                              emailidTextController.text,
-                              passwordTextController.text);
-
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (_) => ChangePassword()));
-                        },
-                        child: Container(
-                          width: double.infinity,
-                          height: 38,
-                          child: Center(
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                HelperClass.nanvigateToScreen(
+                                  context,
+                                  ChangePassword(),
+                                );
+                              },
                               child: Text(
-                            'Sign Up',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 17,
-                                fontWeight: FontWeight.bold),
-                          )),
-                          decoration: BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.circular(10),
+                                'Forgot Password?',
+                                style: TextStyle(
+                                    color: Colors.blue,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                        child: InkWell(
+                          onTap: () async {
+                            //navigation of userscreen page
+                            print('Login Button Tapped');
+                            if (_formKey.currentState!.validate()) {
+                              await userInfoManage.setUserInfo(
+                                  emailidTextController.text,
+                                  passwordTextController.text);
+
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => ChangePassword()));
+                            }
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            height: 38,
+                            child: Center(
+                                child: Text(
+                              'Sign Up',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.bold),
+                            )),
+                            decoration: BoxDecoration(
+                              color: Colors.blue,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 CutomLoader(
                   isLoading: userInfoManage.isLoading,
