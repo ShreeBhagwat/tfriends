@@ -72,6 +72,15 @@ class LoginScreen extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                         child: CustomTextFieldWidget(
+                          validtorFunction: ((value) {
+                            String pattern =
+                                r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                            RegExp regex = RegExp(pattern);
+
+                            return (!regex.hasMatch(value!))
+                                ? 'Is not a valid email'
+                                : null;
+                          }),
                           labeltext: 'Email or Mobile No.',
                           icon: Icons.person,
                           textEditingController: emailidTextController,
@@ -82,7 +91,6 @@ class LoginScreen extends StatelessWidget {
                         child: Consumer<AppStateManager>(
                           builder: (context, appStateManager, child) =>
                               CustomTextFieldWidget(
-                            errorText: isError ? 'Error' : null,
                             labeltext: 'Password',
                             icon: Icons.lock,
                             icons: Icons.visibility,
@@ -129,25 +137,19 @@ class LoginScreen extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                         child: InkWell(
-                          //inkwell gives material properties
                           onTap: () async {
                             //navigation of userscreen page
                             print('Login Button Tapped');
                             if (_formKey.currentState!.validate()) {
+                              await userInfoManage.setUserInfo(
+                                  emailidTextController.text,
+                                  passwordTextController.text);
 
-                            
-                              // await userInfoManage.setUserInfo(
-                              //     emailidTextController.text,
-                              //     passwordTextController.text);
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => ChangePassword()));
                             }
-                            // await userInfoManage.setUserInfo(
-                            //     emailidTextController.text,
-                            //     passwordTextController.text);
-
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //         builder: (_) => ChangePassword()));
                           },
                           child: Container(
                             width: double.infinity,

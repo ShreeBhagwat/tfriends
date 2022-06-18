@@ -10,26 +10,22 @@ class CustomTextFieldWidget extends StatelessWidget {
     this.icons,
     this.iconButton,
     this.errorText,
+    this.validtorFunction,
   }) : super(key: key);
 
   final TextEditingController textEditingController;
   final String labeltext;
   final IconData icon;
   final IconData? icons;
-  bool isObscure;
+  final bool isObscure;
   final IconButton? iconButton;
   final String? errorText;
+  final String? Function(String?)? validtorFunction;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      validator: ((value) {
-        String pattern =
-            r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-        RegExp regex = RegExp(pattern);
-
-        return (!regex.hasMatch(value!)) ? 'Is not a valid email' : null;
-      }),
+      validator: validtorFunction,
       controller: textEditingController,
       obscureText: isObscure,
       decoration: InputDecoration(
