@@ -9,17 +9,17 @@ import '../Widget/custome_button.dart';
 class ChangePassword extends StatelessWidget {
   ChangePassword({Key? key}) : super(key: key);
 
-  TextEditingController passwordTextController = TextEditingController();
-  TextEditingController passwordNewTextController = TextEditingController();
+  TextEditingController oldPasswordTextController = TextEditingController();
 
+  TextEditingController newPasswordTextController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Consumer<AppStateManager>(
+            builder: (context, appStateManager, child) => Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
@@ -37,43 +37,31 @@ class ChangePassword extends StatelessWidget {
                 SizedBox(
                   height: 100,
                 ),
-                Consumer<AppStateManager>(
-                  builder: (context, appStateManager, child) =>
-                      CustomTextFieldWithoutPrefix(
-                    labeltext: 'Old Password',
-                    icons: Icons.visibility,
-                    textEditingController: passwordTextController,
-                    isObscure: appStateManager.isObscureSignUpOldPassword,
-                    iconButton: IconButton(
-                      onPressed: () {
-                        appStateManager
-                            .setChangePasswordScreenPasswordObsecure();
-                      },
-                      icon: Icon(appStateManager.isObscureSignUpOldPassword
-                          ? Icons.visibility
-                          : Icons.visibility_off),
-                    ),
+                CustomTextFieldWithoutPrefix(
+                  labeltext: 'Old Password',
+                  icons: Icons.visibility,
+                  textEditingController: oldPasswordTextController,
+                  isObscure: appStateManager.isObscureChangeOldPassword,
+                  iconButton: IconButton(
+                    onPressed: () {
+                      appStateManager.setIsObscureChangeOldPassword();
+                    },
+                    icon: Icon(true ? Icons.visibility : Icons.visibility_off),
                   ),
                 ),
                 SizedBox(
                   height: 20,
                 ),
-                Consumer<AppStateManager>(
-                  builder: (context, appStateManager, child) =>
-                      CustomTextFieldWithoutPrefix(
-                    labeltext: 'New Password',
-                    icons: Icons.visibility,
-                    textEditingController: passwordNewTextController,
-                    isObscure: appStateManager.isObscureSignUpNewPassword,
-                    iconButton: IconButton(
-                      onPressed: () {
-                        appStateManager
-                            .setChangePasswordScreenNewPasswordObsecure();
-                      },
-                      icon: Icon(appStateManager.isObscureSignUpNewPassword
-                          ? Icons.visibility
-                          : Icons.visibility_off),
-                    ),
+                CustomTextFieldWithoutPrefix(
+                  labeltext: 'New Password',
+                  icons: Icons.visibility,
+                  textEditingController: newPasswordTextController,
+                  isObscure: appStateManager.isObscureChangeNewPassword,
+                  iconButton: IconButton(
+                    onPressed: () {
+                      appStateManager.setIsObscureChangeNewPassword();
+                    },
+                    icon: Icon(true ? Icons.visibility : Icons.visibility_off),
                   ),
                 ),
                 SizedBox(
@@ -83,7 +71,7 @@ class ChangePassword extends StatelessWidget {
                   height: 45,
                   width: double.infinity,
                   font_size: 14,
-                  name: 'New Password',
+                  name: 'Change Password',
                   background_color: Colors.blue,
                   borderRadius: BorderRadius.circular(10),
                   text_color: Colors.white,

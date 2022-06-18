@@ -37,6 +37,8 @@ class NetworkService extends BaseApiService {
   dynamic returnResponse(http.Response response) {
     if (response.statusCode == 200) {
       return response.body;
-    } else {}
+    } else {
+      throw Exception('Error: ${response.statusCode}');
+    }
   }
 }

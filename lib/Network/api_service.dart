@@ -1,6 +1,7 @@
 import 'dart:convert';
 
-import 'package:tfriends/Models/user_info.dart';
+import 'package:http/http.dart';
+import 'package:tfriends/Models/user_info_model.dart';
 import 'package:tfriends/Network/network_service.dart';
 
 class ApiService extends NetworkService {
@@ -18,14 +19,11 @@ class ApiService extends NetworkService {
       "password": password,
       "scope": "regi#62#drivesung#B"
     };
-    var response =
-        await postResponse('https://tugu.drivesung.com/APIV4DEVTEST/token',
-            headers: <String, String>{
-              'Content-Type': 'application/x-www-form-urlencoded',
-              'Accept': 'application/json',
-            },
-            body: body);
-    var decodeJson = jsonDecode(response);
-    return UserInfo.fromJson(decodeJson);
+
+    var response = await postResponse(
+        'https://tugu.drivesung.com/APIV4DEVTEST/token',
+        body: body);
+    var decodedJson = jsonDecode(response);
+    return UserInfo.fromJson(decodedJson);
   }
 }
