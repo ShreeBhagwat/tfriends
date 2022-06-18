@@ -7,6 +7,7 @@ import 'package:tfriends/Screens/change_password.dart';
 
 import '../Helpers/helper_functions.dart';
 import '../Providers/user_info_manager.dart';
+import '../Widget/custom_loader.dart';
 import '../Widget/custom_text_field_widget.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -156,7 +157,10 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                  CutomLoader(isLoading: userInfoManage.isLoading, loadingText: 'Loading',),
+                CutomLoader(
+                  isLoading: userInfoManage.isLoading,
+                  loadingText: 'Loading',
+                ),
               ],
             ),
           ),
@@ -174,56 +178,5 @@ class LoginScreen extends StatelessWidget {
           builder: (_) => ChangePassword(),
         ),
         (route) => false);
-  }
-}
-
-class CutomLoader extends StatelessWidget {
-  const CutomLoader({
-    Key? key,
-    required this.isLoading,
-    required this.loadingText,
-  }) : super(key: key);
-
-  final bool isLoading;
-  final String loadingText;
-
-  @override
-  Widget build(BuildContext context) {
-    return isLoading
-        ? Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            color: Colors.transparent,
-            child: Center(
-                child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.grey.withOpacity(0.5),
-              ),
-              width: 100,
-              height: 100,
-              child: Container(
-                width: 80,
-                height: 80,
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      CircularProgressIndicator(
-                        color: Colors.white,
-                      ),
-                      Text(
-                        loadingText,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 15,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            )))
-        : Container();
   }
 }
