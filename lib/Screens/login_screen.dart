@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:tfriends/Providers/app_state_manager.dart';
+import 'package:tfriends/Providers/user_info_manager.dart';
 import 'package:tfriends/Screens/change_password.dart';
 
 import '../Helpers/helper_functions.dart';
 import '../Widget/custom_text_field_widget.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
 
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
   String emailid = ' ';
 
   String password = ' ';
-  bool isPasswordObscure = true;
+
   TextEditingController emailidTextController = TextEditingController();
 
   TextEditingController passwordTextController = TextEditingController();
@@ -75,21 +73,22 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                  child: CustomTextFieldWidget(
-                    labeltext: 'Password',
-                    icon: Icons.lock,
-                    icons: Icons.visibility,
-                    textEditingController: passwordTextController,
-                    isObscure: isPasswordObscure,
-                    iconButton: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          isPasswordObscure = !isPasswordObscure;
-                        });
-                      },
-                      icon: Icon(isPasswordObscure
-                          ? Icons.visibility
-                          : Icons.visibility_off),
+                  child: Consumer<AppStateManager>(
+                    builder: (context, appStateManager, child) =>
+                        CustomTextFieldWidget(
+                      labeltext: 'Password',
+                      icon: Icons.lock,
+                      icons: Icons.visibility,
+                      textEditingController: passwordTextController,
+                      isObscure: appStateManager.isObscureSignUpPassword,
+                      iconButton: IconButton(
+                        onPressed: () {
+                          appStateManager.setSignupScreenPasswordObscure();
+                        },
+                        icon: Icon(appStateManager.isObscureSignUpPassword
+                            ? Icons.visibility
+                            : Icons.visibility_off),
+                      ),
                     ),
                   ),
                 ),
@@ -125,7 +124,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     //inkwell gives material properties
                     onTap: () {
                       //navigation of userscreen page
-                      LoginUser(context);
+
+                      Provider.of<UserInfoManager>(context, listen: false)
+                          .setUserInfo(emailidTextController.text,
+                              passwordTextController.text);
                     },
                     child: Container(
                       width: double.infinity,
@@ -151,16 +153,5 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
-  }
-
-  void LoginUser(BuildContext context) {
-    emailid = emailidTextController.text;
-    password = passwordTextController.text;
-
-    // Navigator.of(context).pushAndRemoveUntil(
-    //     MaterialPageRoute(
-    //       builder: (_) => DashboardScreen(),
-    //     ),
-    //     (route) => false);
   }
 }
