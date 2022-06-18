@@ -7,6 +7,7 @@ import 'package:tfriends/Providers/app_state_manager.dart';
 import 'package:tfriends/Providers/user_info_manager.dart';
 
 import 'package:tfriends/Screens/login_screen.dart';
+import 'package:tfriends/Screens/splash_screen.dart';
 
 import 'package:tfriends/screens/change_password.dart';
 
@@ -28,7 +29,7 @@ class TFriends extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'No Changes',
-        home: SlashScreen(),
+        home: SplashScreen(),
       ),
     );
   }
